@@ -16,6 +16,23 @@ import PieChartIcon from "@mui/icons-material/PieChart";
 import TimelineIcon from "@mui/icons-material/Timeline";
 import MenuIcon from "@mui/icons-material/Menu";
 import MapIcon from "@mui/icons-material/Map";
+
+const Item = ({ title, to, icon, selected, setSelected }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  return (
+    <MenuItem
+      active={selected === title}
+      style={{ color: colors.grey[100] }}
+      onClick={() => setSelected(title)}
+      icon={icon}
+    >
+      <Typography>{title}</Typography>
+      <Link to={to} />
+    </MenuItem>
+  );
+};
+
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -68,6 +85,143 @@ const Sidebar = () => {
               </Box>
             )}
           </MenuItem>
+
+          {/* User */}
+          {!isCollapsed && (
+            <Box mb={"25px"}>
+              <Box
+                display={"flex"}
+                justifyContent={"center"}
+                alignContent={"center"}
+              >
+                <img
+                  alt="profile-user"
+                  width={"100px"}
+                  height={"100px"}
+                  src={`../../assets/user.jpg`}
+                  style={{ cursor: "pointer", borderRadius: "50%" }}
+                />
+              </Box>
+
+              <Box textAlign={"center"}>
+                <Typography
+                  variant="h2"
+                  color={colors.grey[100]}
+                  fontWeight="bold"
+                  sx={{ m: "10px 0 0 0" }}
+                >
+                  Tuhin Poddar
+                </Typography>
+                <Typography variant="h5" color={colors.greenAccent[500]}>
+                  Admin
+                </Typography>
+              </Box>
+            </Box>
+          )}
+
+          {/* Menu Items */}
+          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+            <Item
+              title="Dashboard"
+              to="/"
+              icon={<HomeIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Data
+            </Typography>
+            <Item
+              title="Manage Team"
+              to="/team"
+              icon={<PeopleIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Contacts Information"
+              to="/contacts"
+              icon={<ContactsIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Invoices Balances"
+              to="/invoices"
+              icon={<ReceiptIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Pages
+            </Typography>
+            <Item
+              title="Profile Form"
+              to="/form"
+              icon={<PersonIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Calendar"
+              to="/calendar"
+              icon={<CalendarTodayIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="FAQ Page"
+              to="/faq"
+              icon={<HelpIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Charts
+            </Typography>
+            <Item
+              title="Bar Chart"
+              to="/bar"
+              icon={<BarChartIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Pie Chart"
+              to="/pie"
+              icon={<PieChartIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Line Chart"
+              to="/line"
+              icon={<TimelineIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Geography Chart"
+              to="/geography"
+              icon={<MapIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+          </Box>
         </Menu>
       </ProSidebar>
     </Box>
